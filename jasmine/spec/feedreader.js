@@ -54,8 +54,12 @@ $(
         /* TODO: Write a new test suite named "The menu" */
         describe('The menu', function() {
             'use strict';
-            const getBody = document.querySelector('body');
-            beforeEach(function() {});
+
+            // body of document
+            const getBody = $('body');
+            // menu icon class
+            const menuIcon = $('.menu-icon-link');
+
             /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
@@ -63,26 +67,59 @@ $(
          */
             it('has menu hidden by default', function() {
                 // Get class attribute of body and check that it contains menu-hidden class
-                expect(getBody.getAttribute('class')).toContain('menu-hidden');
+                // I used vanilla javascript but realized it was easier with the included jquery would be easier
+                // Vanilla javascript: expect(getBody.getAttribute('class')).toContain('menu-hidden');
+
+                // expect body to have menu-hidden class to be true
+                expect(getBody.hasClass('menu-hidden')).toBe(true);
             });
+
             /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+            // Testing toggle when clicked
+            // removes menu-hidden class when clicked and adds menu-hidden when clicked again
+            // Used trigger method http://api.jquery.com/trigger/ to similate click
+            it('toggles menu-hidden class when clicked', function() {
+                // trigger click
+                menuIcon.trigger('click');
+                // check if class menu-hidden is removed
+                expect(getBody.hasClass('menu-hidden')).toBe(false);
+                // trigger click
+                menuIcon.trigger('click');
+                // check if class menu-hidden is added
+                expect(getBody.hasClass('menu-hidden')).toBe(true);
+            });
+        });
 
-            /* TODO: Write a new test suite named "Initial Entries" */
+        /* TODO: Write a new test suite named "Initial Entries" */
+        describe('Initial Entries', function() {
             /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-            /* TODO: Write a new test suite named "New Feed Selection" */
-            /* TODO: Write a test that ensures when a new feed is loaded
+            // Before each load the initial entries which has index id of 0
+            // As per Jasmine docs, beforeEach takes in done and done is called async work is complete
+            beforeEach(function(done) {
+                // Call loadFeed() is called and loads 'Initial Entries'
+                loadFeed(0);
+                // Async work is complete
+                done();
+            });
+            it('have at least a single entry in the feed', function() {
+                // Jquery get parent child: entry of feed
+                const parentChild = $('div.feed article.entry');
+                expect(parentChild.length).not.toBeLessThan(1);
+            });
+        });
+        /* TODO: Write a new test suite named "New Feed Selection" */
+        /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        });
     })()
 );
