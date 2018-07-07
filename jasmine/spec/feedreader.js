@@ -103,17 +103,24 @@ $(
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
             // Before each load the initial entries which has index id of 0
-            // As per Jasmine docs, beforeEach takes in done and done is called async work is complete
+            // As per Jasmine docs and section 3 lesson 22 part 18, beforeEach takes in done
+            // and done is called when async work is complete
             beforeEach(function(done) {
-                // Call loadFeed() is called and loads 'Initial Entries'
-                loadFeed(0);
-                // Async work is complete
-                done();
+                // Call loadFeed() is called and loads 'Initial Entries' index of 0
+                // done use as callback for loadFeed(id,cb)
+                loadFeed(0, function() {
+                    done();
+                });
             });
-            it('have at least a single entry in the feed', function() {
-                // Jquery get parent child: entry of feed
-                const parentChild = $('div.feed article.entry');
-                expect(parentChild.length).not.toBeLessThan(1);
+            // Check for at least a single .entry element in .feed container
+            it('have at least a single entry in the feed', function(done) {
+                // Jquery set parent child
+                const feedContainer = $('.feed');
+                const feedEntry = $('.entry');
+                // Find the child .entry and make sure it is greater than 0
+                // console.log(feedContainer.find(feedEntry));
+                expect(feedContainer.find(feedEntry).length).toBeGreaterThan(0);
+                done();
             });
         });
         /* TODO: Write a new test suite named "New Feed Selection" */
