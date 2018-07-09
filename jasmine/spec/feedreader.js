@@ -28,8 +28,7 @@ $(
                 expect(allFeeds.length).not.toBe(0);
             });
 
-            /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
+            /* Loops through each feed in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
             it('have a URL key defined and the URL value is not empty', function() {
@@ -39,9 +38,8 @@ $(
                 allFeeds.forEach(feed => expect(feed.url.length).not.toBe(0));
             });
 
-            /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
+            /* Loop through each feed in the allFeeds object and ensures it 
+         * has a name defined and that the name is not empty.
          */
             it('have a name key defined and the name value is not empty', function() {
                 // Loop through each feed of allFeeds and check that it has a name key
@@ -51,11 +49,11 @@ $(
             });
         });
 
-        /* TODO: Write a new test suite named "The menu" */
+        /* New test suite named "The menu" */
         describe('The menu', function() {
             'use strict';
 
-            // body of document
+            // Body of document
             const getBody = $('body');
             // menu icon class
             const menuIcon = $('.menu-icon-link');
@@ -85,12 +83,14 @@ $(
             });
         });
 
-        /* TODO: Write a new test suite named "Initial Entries" */
+        /* New test suite named "Initial Entries" */
         describe('Initial Entries', function() {
             'use strict';
-            // Before each, load the initial entries which has index id of 0
-            // As per Jasmine docs and section 3 lesson 22 part 18, beforeEach takes in done
-            // and done is called when async work is complete
+
+            /* Before each, load the initial entries which has index id of 0
+            *  As per Jasmine docs and section 3 lesson 22 part 18, beforeEach takes in done
+            *  and done is called when async work is complete
+            */
             beforeEach(function(done) {
                 // Call loadFeed() is called and loads 'Initial Entries' index of 0
                 // done use as callback for loadFeed(id,cb)
@@ -98,6 +98,7 @@ $(
                     done();
                 });
             });
+
             // Check for at least a single .entry element in .feed container
             it('have at least a single entry in the feed', function(done) {
                 // Jquery set parent child
@@ -113,12 +114,16 @@ $(
         /* Test suite named "New Feed Selection" */
         describe('New Feed Selection', function() {
             'use strict';
+
             let firstHTML, secondHTML;
-            // Logic: From app.js line 56, 'var container = $('.feed')'.
-            // We can loop through each title $('.header-title') and compare them or just compare
-            // the container $('.feed'). Easier to compare the html as a whole, once feeds are loaded
-            // using asynchronous test.
-            // before we run tests, ese beforeEach to gather all the html needed.
+            /* Logic: From app.js line 56, 'var container = $('.feed')'.
+            *  We can loop through each title $('.header-title') and compare them or just compare
+            *  the container $('.feed'). Easier to compare the html as a whole, once feeds are loaded
+            *  using asynchronous test.
+            */
+
+            // Before each gather html to compare. Use done() as call back
+            // before it proceeds to tests.
             beforeEach(function(done) {
                 // First feed loaded by default so just stored HTML
                 firstHTML = $('.feed').html();
