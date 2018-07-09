@@ -60,25 +60,16 @@ $(
             // menu icon class
             const menuIcon = $('.menu-icon-link');
 
-            /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+            // Test if menu is hidden by default
             it('has menu hidden by default', function() {
                 // Get class attribute of body and check that it contains menu-hidden class
-                // I used vanilla javascript but realized it was easier with the included jquery would be easier
+                // I used vanilla javascript but realized it was easier with the included jquery.
                 // Vanilla javascript: expect(getBody.getAttribute('class')).toContain('menu-hidden');
 
                 // expect body to have menu-hidden class to be true
                 expect(getBody.hasClass('menu-hidden')).toBe(true);
             });
 
-            /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
             // Testing toggle when clicked
             // removes menu-hidden class when clicked and adds menu-hidden when clicked again
             // Used trigger method http://api.jquery.com/trigger/ to similate click
@@ -96,13 +87,8 @@ $(
 
         /* TODO: Write a new test suite named "Initial Entries" */
         describe('Initial Entries', function() {
-            /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
-            // Before each load the initial entries which has index id of 0
+            'use strict';
+            // Before each, load the initial entries which has index id of 0
             // As per Jasmine docs and section 3 lesson 22 part 18, beforeEach takes in done
             // and done is called when async work is complete
             beforeEach(function(done) {
@@ -123,10 +109,41 @@ $(
                 done();
             });
         });
-        /* TODO: Write a new test suite named "New Feed Selection" */
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+
+        /* Test suite named "New Feed Selection" */
+        describe('New Feed Selection', function() {
+            'use strict';
+            let firstHTML, secondHTML;
+            // Logic: From app.js line 56, 'var container = $('.feed')'.
+            // We can loop through each title $('.header-title') and compare them or just compare
+            // the container $('.feed'). Easier to compare the html as a whole, once feeds are loaded
+            // using asynchronous test.
+            // before we run tests, ese beforeEach to gather all the html needed.
+            beforeEach(function(done) {
+                // First feed loaded by default so just stored HTML
+                firstHTML = $('.feed').html();
+                // Loaded 2nd feed and stored HTML into variable
+                loadFeed(1, function() {
+                    secondHTML = $('.feed').html();
+                    done();
+                });
+            });
+
+            // Made sure it Reset the feed to default first feed (0) for user
+            afterEach(function(done) {
+                loadFeed(0, function() {
+                    done();
+                });
+            });
+
+            // Compared both HTML to make sure they are not the same
+            it('should not be the same', function() {
+                console.log(firstHTML);
+                console.log(secondHTML);
+                // Console logged the first and second feed's HTML to make sure it showed dif
+                // then wrote test.
+                expect(firstHTML).not.toBe(secondHTML);
+            });
+        });
     })()
 );
