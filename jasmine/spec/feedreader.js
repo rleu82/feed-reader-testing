@@ -138,9 +138,7 @@ $(
             // Made sure it Reset the feed to default first feed (0) for user
             // Used https://jasmine.github.io/2.0/introduction to find afterEach
             afterEach(function(done) {
-                loadFeed(0, function() {
-                    done();
-                });
+                loadFeed(0, done);
             });
 
             // Compared both HTML to make sure they are not the same
