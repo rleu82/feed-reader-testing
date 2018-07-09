@@ -4,7 +4,7 @@ Write tests using [Jasmine](https://jasmine.github.io/) test suite to ensure pro
 
 ## How to run
 
-Download from this [Repository](https://github.com/rleu82/feed-reader-testing) and clicked the green clone or download button or through the terminal by:
+Download by clicking the green clone or download button above or through the terminal by:
 ```
 $ git clone https://github.com/rleu82/feed-reader-testing
 ```
