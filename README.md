@@ -22,6 +22,8 @@ Then compare your feedreader.js file with one from my project here: [feedreader.
 ### Helpful Resources
 1. [Jasmine Introduction](https://jasmine.github.io/2.0/introduction)
 2. [Jasmine Cheat Sheet](https://devhints.io/jasmine)
+3. [Jasmine Jquery Cheat Sheet](https://kapeli.com/cheat_sheets/Jasmine-jQuery.docset/Contents/Resources/Documents/index)
+4. [Jquery Reference](https://api.jquery.com/)
 
 ### Tests and Suites that were written included:
 
