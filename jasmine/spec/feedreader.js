@@ -142,10 +142,10 @@ $(
 
             // Compared both HTML to make sure they are not the same
             it('should not be the same', function() {
-                console.log(firstHTML);
-                console.log(secondHTML);
-                // Console logged the first and second feed's HTML to make sure it showed dif
-                // then wrote test.
+                // console.log(firstHTML);
+                // console.log(secondHTML);
+                // Console logged the first and second feed's HTML to make sure it
+                // showed different HTML worked properly before writing test.
                 expect(firstHTML).not.toBe(secondHTML);
             });
         });
