@@ -40,9 +40,10 @@ $(
          */
             it('have a name key defined and the name value is not empty', function() {
                 // Loop through each feed of allFeeds and check that it has a name key
-                allFeeds.forEach(feed => expect(feed.name).toBeDefined());
-                // Check that each feed name key has a value by having length > 0
-                allFeeds.forEach(feed => expect(feed.name.length).not.toBe(0));
+                allFeeds.forEach(function(feed) {
+                    expect(feed.name).toBeDefined();
+                    expect(feed.name.length).not.toBe(0);
+                });
             });
         });
 
@@ -71,11 +72,11 @@ $(
             */
             it('toggles menu-hidden class when clicked', function() {
                 // trigger click
-                menuIcon.trigger('click');
+                menuIcon.click();
                 // check if class menu-hidden is removed
                 expect(getBody.hasClass('menu-hidden')).toBe(false);
                 // trigger click
-                menuIcon.trigger('click');
+                menuIcon.click();
                 // check if class menu-hidden is added
                 expect(getBody.hasClass('menu-hidden')).toBe(true);
             });
@@ -92,20 +93,17 @@ $(
             beforeEach(function(done) {
                 // Call loadFeed() is called and loads 'Initial Entries' index of 0
                 // done use as callback for loadFeed(id,cb)
-                loadFeed(0, function() {
-                    done();
-                });
+                loadFeed(0, done);
             });
 
             // Check for at least a single .entry element in .feed container
-            it('have at least a single entry in the feed', function(done) {
+            it('have at least a single entry in the feed', function() {
                 // Jquery set parent child
                 const feedContainer = $('.feed');
                 const feedEntry = $('.entry');
                 // Find the child .entry and make sure it is greater than 0
                 // console.log(feedContainer.find(feedEntry));
                 expect(feedContainer.find(feedEntry).length).toBeGreaterThan(0);
-                done();
             });
         });
 
@@ -121,15 +119,19 @@ $(
             */
 
             // Before each, gather html to compare. Use done() as call back
-            // before it proceeds to tests.
+            // before it proceeds to tests. Using Nested Callbacks:
             beforeEach(function(done) {
-                // First feed loaded by default so just stored HTML
-                firstHTML = $('.feed').html();
-                // Loaded 2nd feed and stored HTML into variable
-                loadFeed(1, function() {
-                    secondHTML = $('.feed').html();
-                    // Finished gathering data needed to continue on to test
-                    done();
+                // We load the first RSS feed
+                loadFeed(0, function() {
+                    // The first RSS feed is loaded. Store the feed data into a variable.
+                    firstHTML = $('.feed').html();
+                    // Load the second feed
+                    loadFeed(1, function() {
+                        // Second RSS feed is loaded. Store this feed's data into another variable.
+                        secondHTML = $('.feed').html();
+                        // Both feeds are loaded and data stored in variables. Can now begin tests.
+                        done();
+                    });
                 });
             });
 
@@ -147,6 +149,12 @@ $(
                 // console.log(secondHTML);
                 // Console logged the first and second feed's HTML to make sure it
                 // showed different HTML worked properly before writing test.
+
+                // Check that both variables firstHTML and secondHTML actually contain data.
+                expect(firstHTML.length).toBeGreaterThan(0);
+                console.log(firstHTML.length);
+                expect(secondHTML.length).toBeGreaterThan(0);
+                // Variables contain data. Test to make sure they are not the same.
                 expect(firstHTML).not.toBe(secondHTML);
             });
         });
