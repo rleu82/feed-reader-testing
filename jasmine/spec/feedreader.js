@@ -16,10 +16,7 @@ $(
     */
         describe('RSS Feeds', function() {
             'use strict';
-            /* This is our first test - it tests to make sure that the
-         * allFeeds variable has been defined and that it is not
-         * empty. Experiment with this before you get started on
-         * the rest of this project. What happens when you change
+            /* What happens when you change
          * allFeeds in app.js to be an empty array and refresh the
          * page? - If empty array, test failure. Expected 0 not to be 0.
          */
@@ -60,17 +57,18 @@ $(
 
             // Test if menu is hidden by default
             it('has menu hidden by default', function() {
-                // Get class attribute of body and check that it contains menu-hidden class
-                // I used vanilla javascript but realized it was easier with the included jquery.
-                // Vanilla javascript: expect(getBody.getAttribute('class')).toContain('menu-hidden');
-
+                /* Get class attribute of body and check that it contains menu-hidden class
+                * I used vanilla javascript but realized it was easier with the included jquery.
+                * Vanilla javascript: expect(getBody.getAttribute('class')).toContain('menu-hidden');
+                */
                 // expect body to have menu-hidden class to be true
                 expect(getBody.hasClass('menu-hidden')).toBe(true);
             });
 
-            // Testing toggle when clicked
-            // removes menu-hidden class when clicked and adds menu-hidden when clicked again
-            // Used trigger method http://api.jquery.com/trigger/ to similate click
+            /* Testing toggle when clicked
+            * removes menu-hidden class when clicked and adds menu-hidden when clicked again
+            * Used trigger method http://api.jquery.com/trigger/ to similate click
+            */
             it('toggles menu-hidden class when clicked', function() {
                 // trigger click
                 menuIcon.trigger('click');
@@ -122,7 +120,7 @@ $(
             *  using asynchronous test.
             */
 
-            // Before each gather html to compare. Use done() as call back
+            // Before each, gather html to compare. Use done() as call back
             // before it proceeds to tests.
             beforeEach(function(done) {
                 // First feed loaded by default so just stored HTML
@@ -130,6 +128,7 @@ $(
                 // Loaded 2nd feed and stored HTML into variable
                 loadFeed(1, function() {
                     secondHTML = $('.feed').html();
+                    // Finished gathering data needed to continue on to test
                     done();
                 });
             });
