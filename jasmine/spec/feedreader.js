@@ -152,7 +152,6 @@ $(
 
                 // Check that both variables firstHTML and secondHTML actually contain data.
                 expect(firstHTML.length).toBeGreaterThan(0);
-                console.log(firstHTML.length);
                 expect(secondHTML.length).toBeGreaterThan(0);
                 // Variables contain data. Test to make sure they are not the same.
                 expect(firstHTML).not.toBe(secondHTML);
